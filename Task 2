@@ -29,7 +29,7 @@ public:
     }
 
     void showDist() {
-        cout << "\nDistance : " << feet << " Feet and " << inches << " Inches";
+        cout << "Distance : " << feet << " Feet and " << inches << " Inches";
     }
     
     Distance add(Distance d1, Distance d2) {
@@ -91,7 +91,7 @@ int main() {
 
             
             Result = Result.add(d1, d2);
-            cout << "\nAddition of Two Distances:";
+            cout << "\n\nAddition of Two ";
             Result.showDist();
             break;
 
@@ -107,7 +107,7 @@ int main() {
 
             
             Result = Result.sub(d1, d2);
-            cout << "\nSubtraction of Two Distances:";
+            cout << "\n\nSubtraction of Two ";
             Result.showDist();
             break;
 
@@ -124,3 +124,4 @@ int main() {
 
     return 0;
 }
+
