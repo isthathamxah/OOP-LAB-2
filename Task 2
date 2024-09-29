@@ -1,0 +1,126 @@
+#include <iostream>
+using namespace std;
+
+class Distance {
+public:
+    int feet;
+    int inches;
+
+    void getDist() {
+        do {
+            cout << "\nEnter Feet : ";
+            cin >> feet;
+            if (feet < 0) {
+                cout << "Feet must be a positive integer. Please try again.";
+            }
+        } while (feet < 0);  
+
+        do {
+            cout << "Enter Inches : ";
+            cin >> inches;
+            
+        } while (inches < 0 );  
+
+       
+        if (inches >= 12) {
+            feet += inches / 12;
+            inches = inches % 12;
+        }
+    }
+
+    void showDist() {
+        cout << "\nDistance : " << feet << " Feet and " << inches << " Inches";
+    }
+    
+    Distance add(Distance d1, Distance d2) {
+        Distance add;
+        add.feet = d1.feet + d2.feet;
+        add.inches = d1.inches + d2.inches;
+        if (add.inches >= 12) {
+            add.feet += add.inches / 12;
+            add.inches = add.inches % 12;
+        }
+        return add;
+    }
+    
+    Distance sub(Distance d1, Distance d2) {
+        Distance sub;
+
+        int inches1 = (d1.feet * 12) + d1.inches;
+        int inches2 = (d2.feet * 12) + d2.inches;
+
+        int diff = inches1 - inches2;
+
+        if (diff < 0) {
+            cout << "\nSubtraction results in negative distance.";
+            sub.feet = 0;
+            sub.inches = 0;
+        }
+        else {
+            sub.feet = diff / 12;
+            sub.inches = diff % 12;
+        }
+
+        return sub;
+    }
+};
+
+int main() {
+    Distance d1, d2, Result;
+    int choice;
+
+    do {
+        
+        cout << "\n\n--- Measuring Distance  ---";
+        cout << "\n1. Add Distances";
+        cout << "\n2. Subtract Distances";
+        cout << "\n3. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            
+            cout << "\nEnter the Distance 1:";
+            d1.getDist();
+            d1.showDist();
+
+            cout << "\nEnter the Distance 2:";
+            d2.getDist();
+            d2.showDist();
+
+            
+            Result = Result.add(d1, d2);
+            cout << "\nAddition of Two Distances:";
+            Result.showDist();
+            break;
+
+        case 2:
+            
+            cout << "\nEnter the Distance 1:";
+            d1.getDist();
+            d1.showDist();
+
+            cout << "\nEnter the Distance 2:";
+            d2.getDist();
+            d2.showDist();
+
+            
+            Result = Result.sub(d1, d2);
+            cout << "\nSubtraction of Two Distances:";
+            Result.showDist();
+            break;
+
+        case 3:
+            
+            cout << "\nExiting the program...";
+            break;
+
+        default:
+            cout << "\nInvalid choice! Please select 1, 2, or 3.";
+            break;
+        }
+    } while (choice != 3);  
+
+    return 0;
+}
