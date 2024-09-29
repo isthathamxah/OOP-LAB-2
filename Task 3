@@ -1,0 +1,48 @@
+#include <iostream>
+#include <limits>  
+
+using namespace std;
+
+class Area {
+public:
+    float length;
+    float breadth;
+
+    void Set_dim(float length, float breadth) {
+        this->length = length;
+        this->breadth = breadth;
+    }
+
+    float get_area() {
+        return length * breadth;
+    }
+};
+
+float getPositiveFloatInput(const string& prompt) {
+    float value;
+    while (true) {
+        cout << prompt;
+        cin >> value;
+        if (cin.fail() || value <= 0) {
+            cin.clear(); 
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+            cout << "Please enter a positive number." << endl;
+        }
+        else {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+            return value;
+        }
+    }
+}
+
+int main() {
+    Area Rectangle;
+
+    float length = getPositiveFloatInput("Enter the length of the Rectangle: ");
+    float breadth = getPositiveFloatInput("Enter the breadth of the Rectangle: ");
+
+    Rectangle.Set_dim(length, breadth);
+    cout << "The Area of the Rectangle is: " << Rectangle.get_area() << endl;
+
+    return 0;
+}
