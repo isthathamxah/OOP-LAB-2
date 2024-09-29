@@ -1,0 +1,87 @@
+#include <iostream>
+
+using namespace std;
+
+class Time {
+public:
+    int hours;
+    int minutes;
+    int seconds;
+
+    Time() : hours(0), minutes(0), seconds(0) {}
+
+    void getTime() {
+        cout << "Enter time (hours, minutes, seconds)" << endl;
+        cout << "Enter Hours : ";
+        cin >> hours;
+        cout << "Enter Minutes : ";
+        cin >> minutes;
+        cout << "Enter Seconds : ";
+        cin >> seconds;
+
+   
+        if (seconds >= 60) {
+            minutes += seconds / 60;
+            seconds %= 60;
+        }
+        if (minutes >= 60) {
+            hours += minutes / 60;
+            minutes %= 60;
+        }
+    }
+
+    void displayTime(Time t)  {
+        cout << t.hours << " hours, " << t.minutes << " minutes and " << t.seconds << " seconds" << endl;
+    }
+
+    void addTime(Time t1, Time t2) {
+        seconds = t1.seconds + t2.seconds;
+        minutes = t1.minutes + t2.minutes + seconds / 60;
+        hours = t1.hours + t2.hours + minutes / 60;
+
+        if (seconds >= 60) {
+            minutes += seconds / 60;
+            seconds %= 60;
+        }
+        if (minutes >= 60) {
+            hours += minutes / 60;
+            minutes %= 60;
+        }
+    }
+
+    void Number_of_Days() {
+        int totalSeconds = hours * 3600 + minutes * 60 + seconds;
+        int days = totalSeconds / 86400; 
+        totalSeconds %= 86400; 
+
+        int remainingHours = totalSeconds / 3600;
+        totalSeconds %= 3600;
+
+        int remainingMinutes = totalSeconds / 60;
+        int remainingSeconds = totalSeconds % 60;
+
+        cout << "Time equivalent: " << days << " days, "
+            << remainingHours << " hours, "
+            << remainingMinutes << " minutes, and "
+            << remainingSeconds << " seconds." << endl;
+    }
+};
+
+int main() {
+    Time t1, t2, totalTime;
+
+    cout << "Enter first time:\n";
+    t1.getTime();
+    cout << "Enter second time:\n";
+    t2.getTime();
+
+ 
+    totalTime.addTime(t1, t2);
+
+    cout << "Total Time: ";
+    totalTime.displayTime(totalTime);
+
+    totalTime.Number_of_Days();
+
+    return 0;
+}
